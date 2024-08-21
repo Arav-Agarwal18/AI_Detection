@@ -1,0 +1,24 @@
+<!-- myapp/templates/myapp/predict.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Text Prediction</title>
+</head>
+
+<body style = "text-align: center"> 
+    <h2 style="text-align:center">Text Prediction</h2>
+    Input text in the box below, click predict, and get a sentence-by-sentence probability for AI generation
+
+    <form method="post" action="{% url 'predict' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Predict">
+    </form>
+
+    {% if prediction_result %}
+        {% for key, value in prediction_result.items %}
+            <p>{{ key }}: {{ value }}</p>
+        {% endfor %}
+    {% endif %}
+</body>
+</html>
